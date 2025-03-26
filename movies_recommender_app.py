@@ -19,7 +19,10 @@ def recommend(movie):
 
     recommended_movies=[]
     recommended_movies_posters=[]
+    similarity_score=[]
     for i in movies_list:
+        similarity_score.append((i[1]*100+50).round(2))
+
         movie_id = movies.iloc[i[0]].movie_id
 
         recommended_movies.append(movies.iloc[i[0]].title)
@@ -27,7 +30,7 @@ def recommend(movie):
         # fetch poster through api
         recommended_movies_posters.append(fetch_posters(movie_id))
 
-    return recommended_movies,recommended_movies_posters
+    return recommended_movies,recommended_movies_posters,similarity_score
 
 st.title('Movie Recommender System')
 
@@ -37,25 +40,30 @@ selected_movie_name = st.selectbox(
 )
 
 if st.button('Recommend'):
-    names,posters = recommend(selected_movie_name)
+    names,posters,similarity_score = recommend(selected_movie_name)
    # for i in recommendations:
    #   st.write(i)
 
     col1,col2,col3,col4,col5=st.columns(5)
     with col1:
+        st.write(similarity_score[0]," % similar")
         st.text("hello")
         st.text(names[0])
         st.image(posters[0])
     with col2:
+        st.write(similarity_score[1]," % similar")
         st.text(names[1])
         st.image(posters[1])
     with col3:
+        st.write(similarity_score[2]," % similar")
         st.text(names[2])
         st.image(posters[2])
     with col4:
+        st.write(similarity_score[3]," % similar")
         st.text(names[3])
         st.image(posters[3])
     with col5:
+        st.write(similarity_score[4]," % similar")
         st.text(names[4])
         st.image(posters[4])
     
