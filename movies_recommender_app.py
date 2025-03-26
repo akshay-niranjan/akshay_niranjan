@@ -18,7 +18,7 @@ def recommend(movie):
     movies_list = sorted(list(enumerate(distances)),reverse=True,key=lambda x:x[1])[1:6]
 
     recommended_movies=[]
-    #recommended_movies_posters=[]
+    recommended_movies_posters=[]
     for i in movies_list:
         movie_id = movies.iloc[i[0]].movie_id
 
@@ -27,7 +27,7 @@ def recommend(movie):
         # fetch poster through api
         recommended_movies_posters.append(fetch_posters(movie_id))
 
-    return recommended_movies#,recommended_movies_posters
+    return recommended_movies,recommended_movies_posters
 
 st.title('Movie Recommender System')
 
