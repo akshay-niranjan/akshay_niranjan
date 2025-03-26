@@ -37,7 +37,7 @@ selected_movie_name = st.selectbox(
 )
 
 if st.button('Recommend'):
-    names = recommend(selected_movie_name)
+    names,posters = recommend(selected_movie_name)
    # for i in recommendations:
    #   st.write(i)
 
